@@ -1,43 +1,50 @@
 #include "queue.h"
-#include "node.h"
+
 #include <stdlib.h>
 
-void initQueue(Queue *p)
+#include "node.h"
+
+void initQueue(Queue* q)
 {
-    p->head = NULL;
-    p->head = NULL;
-    p->size = 0;
+    q->head = NULL;
+    q->tail = NULL;
+    q->size = 0;
 }
 
-bool isEmpty(Queue *p)
+bool isEmpty(Queue* q)
 {
-    return p->head == NULL && p->tail == NULL ? true : false;
+    return q->head == NULL && q->tail == NULL ? true : false;
 }
 
-void enqueue(Queue *p, int item)
+void enqueue(Queue* q, int item)
 {
-    Node *newNode;
+    Node* newNode;
     newNode = createNode(item, NULL);
 
-    if (isEmpty(p))
-    {
-        p->head = newNode;
-        p->tail = newNode;
-    }
+    if (isEmpty(q))
+        q->head = newNode;
+    else
+        q->tail->next = newNode;
 
-    p->tail = newNode;
+    q->tail = newNode;
+    q->size++;
 }
 
-void dequeue(Queue *p)
+void dequeue(Queue* q)
 {
-    
+    if (isEmpty(q))
+        return;
 
-    if (!isEmpty(p))
+    if (q->head->next == NULL)
     {
-        Node *aux;
-        aux = createNode(p->head, NULL);
-
-        
+        q->tail = NULL;
+        q->size = 0;
+        free(q->head);
+        return;
     }
-    
+
+    Node* aux = q->head->next;
+    free(q->head);
+    q->head = aux;
+    q->size--;
 }

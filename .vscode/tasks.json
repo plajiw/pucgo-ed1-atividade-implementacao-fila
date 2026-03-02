@@ -7,7 +7,7 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "${file}",
+                "${fileDirname}\\*.c", // COMPILA TODOS OS ARQUIVOS .C DA PASTA
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
@@ -25,4 +25,4 @@
         }
     ],
     "version": "2.0.0"
-}
+}   

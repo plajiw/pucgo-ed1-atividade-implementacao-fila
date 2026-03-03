@@ -4,6 +4,7 @@
 int main()
 {
     Queue q;
+
     initQueue(&q);
     enqueue(&q, 1);
     enqueue(&q, 2);
@@ -21,6 +22,7 @@ int main()
 
     indexElement(&q, 3);
 
-    getchar();
-    return 0;
+    printQueue(&q);
+
+    destroyQueue(&q);
 }

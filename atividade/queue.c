@@ -5,26 +5,27 @@
 
 #include "node.h"
 
-void initQueue(Queue* q)
+void initQueue(Queue *q)
 {
     q->head = NULL;
     q->tail = NULL;
     q->size = 0;
 }
 
-bool isEmpty(Queue* q)
+bool isEmpty(Queue *q)
 {
     return q->head == NULL && q->tail == NULL ? true : false;
 }
 
-void destroyQueue(Queue* q)
+void destroyQueue(Queue *q)
 {
     eraseQueue(q);
+    free(q);
 }
 
-int indexElement(Queue* q, int item)
+int indexElement(Queue *q, int item)
 {
-    Node* current = q->head;
+    Node *current = q->head;
     int index = 0;
 
     while (current != NULL)
@@ -39,7 +40,7 @@ int indexElement(Queue* q, int item)
     return -1;
 }
 
-int firstElement(Queue* q)
+int firstElement(Queue *q)
 {
     if (isEmpty(q))
         return -1;
@@ -47,9 +48,9 @@ int firstElement(Queue* q)
     return q->head->value;
 }
 
-void enqueue(Queue* q, int item)
+void enqueue(Queue *q, int item)
 {
-    Node* newNode;
+    Node *newNode;
     newNode = createNode(item, NULL);
 
     if (isEmpty(q))
@@ -61,7 +62,7 @@ void enqueue(Queue* q, int item)
     q->size++;
 }
 
-void dequeue(Queue* q)
+void dequeue(Queue *q)
 {
     if (isEmpty(q))
         return;
@@ -74,13 +75,13 @@ void dequeue(Queue* q)
         return;
     }
 
-    Node* aux = q->head->next;
+    Node *aux = q->head->next;
     free(q->head);
     q->head = aux;
     q->size--;
 }
 
-void eraseQueue(Queue* q)
+void eraseQueue(Queue *q)
 {
     while (!isEmpty(q))
         dequeue(q);
@@ -90,9 +91,9 @@ void eraseQueue(Queue* q)
     q->size = 0;
 }
 
-void printQueue(Queue* q)
+void printQueue(Queue *q)
 {
-    Node* current = q->head;
+    Node *current = q->head;
 
     while (current != NULL)
     {
